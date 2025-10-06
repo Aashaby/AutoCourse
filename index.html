@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抢课系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        .captcha-img {
+            max-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <div class="text-center mb-8 fade-in">
+            <h1 class="text-4xl font-bold text-indigo-900 mb-2">
+                <i class="fas fa-graduation-cap mr-3"></i>课程抢课系统
+            </h1>
+            <p class="text-gray-600">安全、快速、可靠的课程注册工具</p>
+        </div>
+
+        <!-- Course List Info -->
+        <div id="courseListSection" class="bg-white rounded-2xl shadow-xl p-8 mb-6 fade-in">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-list-ul mr-2 text-indigo-600"></i>可选课程列表
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">课程ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">课程名称</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">名额</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">地点</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972131006232133632</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高二播音主持</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二2班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972130635480825856</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高二国际跳棋</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">图书馆三楼学习1室</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972130193355046912</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高二游泳课程</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">体育馆1楼游泳馆</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972129499990458368</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高二5分钟银幕初体验</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二1班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972129185979695104</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高二跆拳道腿法</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">16人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">体育馆2楼健身房</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972128869527846912</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">武术南拳理论与实践</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">12人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">体育馆3楼舞台旁</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972127645495721984</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">卓越剑士</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">体育馆1楼休息台集合</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972127138542780416</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">心理与时事</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">心理课室</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972126792231682048</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">敦煌印象</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">国学中心一楼国画室</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972126523137720320</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">未来校园"植物昆虫大作战"</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高中部五楼生物学科教室1</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972126170149289984</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">解码生命：从生理到心理的探索</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高中部五楼生物学科教室2</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972125879840538624</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">"化"险为夷——基础巩固</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高中部五楼化学学科教室1</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972125182524915712</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">"化"繁为简——思维提升</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高中部五楼化学学科教室2</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972116300721291264</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">寻迹山河：最美的课堂在路上</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二13班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972115990175023104</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">全国中学生地球科学竞赛</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二18班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972115166958977024</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">野猪刺猬地质队</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二17班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972114695120748544</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">心怀家国——历史视野与大思政</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二9班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972114065111121920</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">广州话，I like it</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二16班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972112300978470912</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高考英语衡水体书写工坊</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二15班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972111796907016192</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高中英语主题语境群文大闯关</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二14班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972110380545081344</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">排球基础</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">体育馆三楼排球场</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972109182903517184</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">K-Pop星动力：韩流之旅</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二12班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972108707449798656</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">高中数学建模</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">28人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二11班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972108361860120576</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">数学思维课：以问题为引</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">40人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二10班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972106988569493504</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">数学故事会</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二8班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972106634238885888</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">跟着语文课本去旅行</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二7班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972106314507091968</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">文学类文本阅读与电影</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高中部教学楼一楼特长生教室1</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972105941214035968</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">尺素千里：文学短篇的阅读与解码</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二6班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972104686429274112</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">经典领读——古今中外经典书目</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">30人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二5班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1972104295855685632</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">脱口秀鉴赏与创作</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二4班</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1971854381305298944</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">"诗弦外"视频号品牌化建设</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">高二3班</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 text-sm text-gray-500">
+                <i class="fas fa-info-circle mr-1"></i>
+                报名时间: 2025-10-07 09:00 至 2025-10-08 17:00 | 共31门课程 | 点击课程ID可复制
+            </p>
+        </div>
+
+        <!-- Encryption Key Input (Hidden by default) -->
+        <div id="keyInputSection" class="bg-white rounded-2xl shadow-xl p-8 mb-6 fade-in">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-key mr-2 text-indigo-600"></i>解密账号数据
+            </h2>
+            <p class="text-gray-600 mb-4">请输入解密密钥以加载预设账号（如果没有加密文件，可直接跳过）</p>
+            <div class="flex gap-4">
+                <input type="password" id="decryptionKey" placeholder="输入解密密钥" 
+                    class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none">
+                <button onclick="decryptAndLoadAccounts()" 
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+                    <i class="fas fa-unlock mr-2"></i>解密加载
+                </button>
+                <button onclick="skipDecryption()" 
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    跳过
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div id="mainCard" class="bg-white rounded-2xl shadow-xl p-8 mb-6 fade-in hidden">
+            <!-- Account Management Section -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-users mr-2 text-indigo-600"></i>账号管理
+                </h2>
+                
+                <!-- Add Account Form -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                        <input type="text" id="username" placeholder="账号" 
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none">
+                        <input type="password" id="password" placeholder="密码" 
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none">
+                        <input type="text" id="courseTaskId" placeholder="课程任务ID" 
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none">
+                        <input type="text" id="nickname" placeholder="姓名(可选)" 
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none">
+                    </div>
+                    <button onclick="addAccount()" 
+                        class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+                        <i class="fas fa-plus mr-2"></i>添加账号
+                    </button>
+                </div>
+
+                <!-- Accounts List -->
+                <div id="accountsList" class="space-y-2"></div>
+            </div>
+
+            <!-- Captcha Section -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-shield-alt mr-2 text-indigo-600"></i>验证码
+                </h2>
+                <div class="flex flex-col md:flex-row items-center gap-4">
+                    <div id="captchaContainer" class="flex-shrink-0">
+                        <img id="captchaImage" class="captcha-img hidden" alt="验证码">
+                        <p class="text-gray-500 text-sm" id="captchaPlaceholder">点击获取验证码按钮加载</p>
+                    </div>
+                    <div class="flex-grow w-full md:w-auto">
+                        <input type="text" id="captchaInput" placeholder="请输入验证码" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none mb-2">
+                        <button onclick="getCaptcha()" 
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+                            <i class="fas fa-sync-alt mr-2"></i>获取验证码
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col md:flex-row gap-4">
+                <button onclick="startGrabbing()" 
+                    class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-lg hover:shadow-xl text-lg">
+                    <i class="fas fa-rocket mr-2"></i>开始抢课
+                </button>
+                <button onclick="stopGrabbing()" 
+                    class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-lg hover:shadow-xl text-lg">
+                    <i class="fas fa-stop mr-2"></i>停止抢课
+                </button>
+            </div>
+        </div>
+
+        <!-- Log Section -->
+        <div id="logSection" class="bg-white rounded-2xl shadow-xl p-8 fade-in hidden">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center justify-between">
+                <span><i class="fas fa-list mr-2 text-indigo-600"></i>运行日志</span>
+                <button onclick="clearLog()" class="text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-3 rounded">
+                    <i class="fas fa-trash mr-1"></i>清空
+                </button>
+            </h2>
+            <div id="logContainer" class="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm h-64 overflow-y-auto">
+                <div class="text-gray-500">等待操作...</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 text-gray-600 text-sm">
+            <p><i class="fas fa-lock mr-1"></i>所有数据加密存储在本地浏览器，不会上传到服务器</p>
+            <p class="mt-2"><i class="fas fa-info-circle mr-1"></i>GitHub Pages 部署 | HTTPS 加密传输</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
